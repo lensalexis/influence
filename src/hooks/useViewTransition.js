@@ -1,8 +1,10 @@
 "use client";
 import { useTransitionRouter } from "next-view-transitions";
+import { useLenis } from "lenis/react";
 
 export const useViewTransition = () => {
   const router = useTransitionRouter();
+  const lenis = useLenis();
 
   function slideInOut() {
     document.documentElement.animate(
@@ -48,8 +50,27 @@ export const useViewTransition = () => {
       return;
     }
 
+    // Don't reset scroll on current page - let navigation happen in background
     router.push(href, {
-      onTransitionReady: slideInOut,
+      onTransitionReady: () => {
+        slideInOut();
+        
+        // Reset scroll on new page after transition starts (but before it's visible)
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          if (lenis) {
+            lenis.scrollTo(0, { immediate: true });
+          }
+        }, 100);
+        
+        // Reset after transition completes (2000ms + buffer) to ensure it's at top
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'instant' });
+          if (lenis) {
+            lenis.scrollTo(0, { immediate: true });
+          }
+        }, 2100);
+      },
       ...options,
     });
   };

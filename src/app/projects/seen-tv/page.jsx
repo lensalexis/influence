@@ -10,8 +10,14 @@ import { spacesData } from "../spaces.js";
 const Page = () => {
   // Get next project (excluding current one)
   const currentRoute = "/projects/seen-tv";
-  const otherProjects = spacesData.filter(space => space.route !== currentRoute);
-  const nextProject = otherProjects[0] || spacesData[0];
+  const currentIndex = spacesData.findIndex(space => space.route === currentRoute);
+  // Get the next project in sequence, wrapping around
+  let nextIndex = currentIndex >= 0 ? (currentIndex + 1) % spacesData.length : 0;
+  // If the next project is the current one (shouldn't happen, but safety check), get first other project
+  if (spacesData[nextIndex]?.route === currentRoute) {
+    nextIndex = spacesData.findIndex(space => space.route !== currentRoute);
+  }
+  const nextProject = spacesData[nextIndex] || spacesData[0];
   return (
     <>
       <Nav />

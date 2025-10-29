@@ -1,8 +1,44 @@
 "use client";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
-import { ReactLenis } from "lenis/react";
+import { ReactLenis, useLenis } from "lenis/react";
 import { ViewTransitions } from "next-view-transitions";
+
+function ScrollReset({ children }) {
+  const pathname = usePathname();
+  const lenis = useLenis();
+
+  // Reset scroll position when route changes
+  useEffect(() => {
+    // Multiple scroll resets to ensure it works despite timing issues
+    const resetScroll = () => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      }
+    };
+
+    // Immediate reset
+    resetScroll();
+    
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(resetScroll);
+    
+    // Reset after view transition might complete (accounts for 2000ms transition)
+    const timeoutId1 = setTimeout(resetScroll, 100);
+    const timeoutId2 = setTimeout(resetScroll, 500);
+    const timeoutId3 = setTimeout(resetScroll, 2100);
+
+    return () => {
+      clearTimeout(timeoutId1);
+      clearTimeout(timeoutId2);
+      clearTimeout(timeoutId3);
+    };
+  }, [pathname, lenis]);
+
+  return <>{children}</>;
+}
 
 export default function ClientLayout({ children }) {
   const [isMobile, setIsMobile] = useState(false);
@@ -54,7 +90,7 @@ export default function ClientLayout({ children }) {
   return (
     <ViewTransitions>
       <ReactLenis root options={scrollSettings}>
-        {children}
+        <ScrollReset>{children}</ScrollReset>
       </ReactLenis>
     </ViewTransitions>
   );

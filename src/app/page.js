@@ -130,6 +130,7 @@ export default function Home() {
           },
           onComplete: () => {
             gsap.set(".loader", { pointerEvents: "none" });
+            gsap.set(".intro-logo", { opacity: 0, visibility: "hidden", display: "none" });
             setLoaderAnimating(false);
           },
         },
@@ -422,8 +423,8 @@ export default function Home() {
               <div className="gallery-callout-img gallery-callout-img-2">
                 <img src="/featured-projects/mlfa.jpg" alt="" />
                 <div className="gallery-callout-img-content">
-                  <h3>800+</h3>
-                  <p>Project Images</p>
+                  <h3>50+</h3>
+                  <p>Campaigns</p>
                 </div>
               </div>
             </div>

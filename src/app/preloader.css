@@ -33,6 +33,16 @@
   gap: 0.5rem;
 }
 
+/* Hide intro-logo after loader completes */
+.loader[style*="pointer-events: none"] .intro-logo,
+.loader .intro-logo[style*="display: none"],
+.loader .intro-logo[style*="opacity: 0"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 .loader #word-1 {
   position: relative;
   left: 0rem;
