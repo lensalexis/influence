@@ -1,0 +1,143 @@
+.projects-hero {
+  position: relative;
+  width: 100vw;
+  min-height: 150svh;
+  height: 100%;
+  overflow: hidden;
+}
+
+.projects-hero .projects-hero-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.projects-hero .projects-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(20, 19, 19, 0.7);
+  z-index: 1;
+}
+
+.projects-content {
+  padding: 4rem 0 8rem 0;
+}
+
+.projects-hero-header h1 {
+  position: relative;
+}
+
+.projects-hero .container {
+  position: relative;
+  padding-top: 35svh;
+  color: var(--base-100);
+  z-index: 2;
+}
+
+.projects-hero .container .projects-content,
+.projects-details.projects-details-1 .container,
+.projects-details.projects-details-2 .container {
+  display: flex;
+  position: relative;
+  gap: 2rem;
+}
+
+.projects-col:nth-child(1) {
+  flex: 2;
+}
+
+.projects-col:nth-child(2) {
+  flex: 3;
+}
+
+.projects-hero .projects-content .projects-col:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.projects-hero .projects-content .projects-col:nth-child(2) h3 {
+  width: 85%;
+  margin-bottom: 2rem;
+}
+
+.projects-meta .projects-hero-row {
+  display: flex;
+  gap: 2rem;
+}
+
+.projects-meta .projects-hero-row .projects-hero-sub-col {
+  flex: 1;
+}
+
+.projects-meta
+  .projects-hero-row
+  .projects-hero-sub-col
+  p:nth-child(1) {
+  margin-bottom: 1rem;
+}
+
+.projects-details {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+  overflow: hidden;
+  color: var(--base-350);
+  padding-top: 4rem;
+}
+
+.projects-details h3 {
+  width: 85%;
+  color: var(--base-100);
+  margin-bottom: 2rem;
+}
+
+.projects-details-img {
+  width: 75%;
+  border-radius: 2rem;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  margin-top: 4rem;
+}
+
+.projects-details-img img {
+  opacity: 0.85;
+}
+
+.projects-details.projects-details-2 .projects-meta {
+  margin-bottom: 4rem;
+  color: var(--base-100);
+}
+
+.projects-details.projects-details-2
+  .projects-meta
+  .projects-hero-sub-col
+  p:nth-child(1) {
+  color: var(--base-350);
+  margin-bottom: 1rem;
+}
+
+.projects-details.projects-details-2 .projects-details-img {
+  margin-top: 8rem;
+  margin-bottom: 4rem;
+}
+
+@media (max-width: 1000px) {
+  .projects-hero .container .projects-content,
+  .projects-details.projects-details-1 .container,
+  .projects-details.projects-details-2 .container {
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .projects-details-img,
+  .projects-hero .projects-content .projects-col:nth-child(2) h3,
+  .projects-details h3 {
+    width: 100%;
+  }
+}
